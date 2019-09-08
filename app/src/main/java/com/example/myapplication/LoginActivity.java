@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void run(){
                             progressDialog.dismiss();
-                            Intent intent1 = new Intent(LoginActivity.this, Main1Activity.class);
+                            Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent1);
                         }
                     },5000);
