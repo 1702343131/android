@@ -2,6 +2,9 @@ package com.example.zwx;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.SparseArray;
@@ -9,6 +12,8 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.example.MySettingFragment;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -25,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         initTitles();
+        initFragment();
         rgNav.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -75,5 +81,24 @@ public class MainActivity extends AppCompatActivity {
         titles.put(R.id.rb_find,"习题");
         titles.put(R.id.rb_web,"资讯");
         titles.put(R.id.rb_my,"我的");
+    }
+
+
+
+    //9.10
+    private SparseArray<Fragment> fragments;
+    private void initFragment(){
+        //1.创建fragment的列表
+        fragments = new SparseArray<>();
+        fragments.put(R.id.rb_my, MySettingFragment.newInstance());
+        //2.加载默认的Fragment
+        replaceFragment(fragments.get(R.id.rb_my));
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.replace(R.id.fragment_main,fragment);
+        ft.commit();
     }
 }

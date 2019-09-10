@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin = findViewById(R.id.login_btn);
         registerNow = findViewById(R.id.register_now);
         registerNow.setOnClickListener(this);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         lgUsername.setText(username);
         initToolbar();
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
                             Intent intent1 = new Intent(LoginActivity.this, MainActivity.class);
                             intent1.putExtra("isLogin",true);
-                            startActivity(intent1);
+                            setResult(RESULT_OK,intent1);
                             LoginActivity.this.finish();
                         }
                     },5000);
